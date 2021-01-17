@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Bilet.h" />
-    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Film.h" />
-    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Loc.h" />
-    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Program.h" />
-    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Sala.h" />
+    <ClInclude Include="Bilet.h" />
+    <ClInclude Include="Film.h" />
+    <ClInclude Include="Loc.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="Sala.h" />
     <ClInclude Include="CinemaCity.h" />
   </ItemGroup>
   <ItemGroup>
