@@ -139,6 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Bilet.h" />
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Film.h" />
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Loc.h" />
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Program.h" />
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Sala.h" />
+    <ClInclude Include="CinemaCity.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="CinemaCity.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

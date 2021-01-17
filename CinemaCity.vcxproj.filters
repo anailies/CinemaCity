@@ -15,6 +15,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Bilet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Film.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Loc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\repos\CinemaCity\CinemaCity\Sala.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CinemaCity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="CinemaCity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

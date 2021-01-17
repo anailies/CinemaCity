@@ -1,11 +1,38 @@
 // CinemaCity.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "Program.h"
+#include "Bilet.h"
+#include "CinemaCity.h"
 #include <iostream>
+
+const string Program::regexData = "^([0]\\d|[1][0-2])\\/([0-2]\\d|[3][0-1])\\/([2][01]|[1][6-9])\\d{2}(\\s([0-1]\\d|[2][0-3])(\\:[0-5]\\d){1,2})?$";
+const int Loc::discount = 10;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Sala sala;
+    cin >> sala;
+    cout << sala;
+
+    Loc loc;
+    cin >> loc;
+    cout << loc;
+
+
+    Film film;
+    cin >> film;
+    cout << film;
+
+
+    Bilet bilet;
+    cin >> bilet;
+    cout << bilet;
+
+
+    Program program;
+    cin >> program;
+    cout << program;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
