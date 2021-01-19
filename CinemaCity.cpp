@@ -12,7 +12,6 @@ const int Loc::discount = 10;
 
 int main()
 {
-
 	cout << Film::generateId();
 
 	cout << "**********CINEMA CITY*****************" << endl;
@@ -21,10 +20,15 @@ int main()
 	int optiune;
 	cout << "1 - Emitere bilet" << endl;
 	cout << "2 - Program" << endl;
+	cout << "3 - Adaugare film" << endl;
+	cout << "4 - Adaugare sala" << endl;
+	cout << "5 - Adaugare program" << endl;
+
 	cout << "Orice alt caracter - Exit" << endl;
 	cin >> optiune;
 
-	while (optiune == 1 || optiune == 2) {
+	while (optiune == 1 || optiune == 2 || optiune == 3 || optiune == 4 || optiune == 5) {
+
 		if (optiune == 1) {
 			int idFilm;
 			int idProgram;
@@ -63,14 +67,6 @@ int main()
 			Bilet* bilet = new Bilet(Bilet::generateId(), idSala, idProgram, idLoc, film->getTarif());
 			cin >> *bilet;
 
-
-			cout << "**********CINEMA CITY*****************";
-			cout << "Alegeti una din optiunile de mai jos: ";
-			cout << "1 - Emitere bilet";
-			cout << "2 - Program";
-			cout << "Orice alt caracter - Exit";
-			cin >> optiune;
-
 			delete bilet;
 			delete film;
 			delete program;
@@ -79,15 +75,30 @@ int main()
 		}
 		else if (optiune == 2) {
 			Program::printeazaTotProgramul();
-
-
-			cout << "**********CINEMA CITY*****************";
-			cout << "Alegeti una din optiunile de mai jos: ";
-			cout << "1 - Emitere bilet";
-			cout << "2 - Program";
-			cout << "Orice alt caracter - Exit";
-			cin >> optiune;
 		}
+		else if (optiune == 3) {
+			Film* film = new Film(Film::generateId());
+			cin >> *film;
+		}
+		else if (optiune == 4) {
+			Sala* sala = new Sala(Sala::generateId());
+			cin >> *sala;
+		}
+		else if (optiune == 5) {
+			Program* program = new Program(Program::generateId());
+			cin >> *program;
+		}
+
+		cout << "**********CINEMA CITY*****************" << endl;
+		cout << "Alegeti una din optiunile de mai jos: " << endl;
+		cout << "1 - Emitere bilet" << endl;
+		cout << "2 - Program" << endl;
+		cout << "3 - Adaugare film" << endl;
+		cout << "4 - Adaugare sala" << endl;
+		cout << "5 - Adaugare program" << endl;
+
+		cout << "Orice alt caracter - Exit" << endl;
+		cin >> optiune;
 	}
 };
 
