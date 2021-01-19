@@ -550,7 +550,7 @@ ostream& operator<<(ostream& out, Program p) {
     out << "id-ul programului : " << endl;
     out << p.idProgram << endl;
 
-    out << "data programului : " << endl;
+    out << "data programului format (2017-02-14 19:30): " << endl;
     out << p.data << endl;
 
     out << "id film : " << endl;
