@@ -570,7 +570,7 @@ ostream& operator<<(ostream& out, Program p) {
 
 istream& operator>>(istream& in, Program& p) {
 
-    cout << "Introduceti data programului (format data 2017-02-14 19:30): ";
+    cout << "Introduceti data programului: ";
     in >> ws;
     string data;
     getline(in, data);
