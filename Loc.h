@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <fstream>
 using namespace std;
 
 class Loc {
@@ -26,7 +27,9 @@ public:
 		this->coloana = 0;
 		this->numarRanduri = 0;
 		this->randuriDezavantajate = nullptr;
+		this->ocupat = false;
 		this->tipDiscount = nullptr;
+		this->aplicaDiscount = false;
 	}
 
 	Loc(int rand, int* randuriDezavantajate, char* tipDiscount, bool ocupat, bool aplicaDiscount, int numarRanduri, int coloana) : id(id) {
@@ -228,6 +231,224 @@ public:
 		return *this;
 	}
 
+
+	/*
+	UPDATE NOT WORKING
+	*/
+	void update(int id1) {
+		ifstream f("loc2.bin", ios::binary);
+		fstream of("loc3.bin", ios::app);
+
+		of.write((char*)&id, sizeof(id));
+		of.write((char*)&coloana, sizeof(coloana));
+		of.write((char*)&rand, sizeof(rand));
+
+		of.write(tipDiscount, (long long)strlen(tipDiscount) + 1);
+		of.write((char*)&numarRanduri, sizeof(numarRanduri));
+
+		for (int i = 0; i < numarRanduri; i++)
+		{
+			of.write((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+		}
+		//f.close();
+
+		int fileId;
+
+		while (f.read((char*)&fileId, sizeof(fileId))) {
+			if (fileId != id1) {
+				int pos = f.tellg();
+				f.read((char*)&coloana, sizeof(coloana));
+				f.read((char*)&rand, sizeof(rand));
+
+				string buffer = "";
+				char c = 0;
+				while ((c = f.get()) != 0)
+				{
+					buffer += c;
+				}
+				delete[] tipDiscount;
+				tipDiscount = new char[buffer.length() + 1];
+				strcpy_s(tipDiscount, buffer.length() + 1, buffer.c_str());
+
+				f.read((char*)&numarRanduri, sizeof(numarRanduri));
+				delete[] randuriDezavantajate;
+				randuriDezavantajate = new int[numarRanduri];
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					f.read((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+				int pos2 = f.tellg();
+
+				of.write((char*)&id, sizeof(id));
+				of.write((char*)&coloana, sizeof(coloana));
+				of.write((char*)&rand, sizeof(rand));
+
+				of.write(tipDiscount, (long long)strlen(tipDiscount) + 1);
+				of.write((char*)&numarRanduri, sizeof(numarRanduri));
+
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					of.write((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+			}
+		}
+
+		of.close();
+		f.close();
+
+		if (remove("loc2.bin") != 0)
+			cout << "Fisierul a fost sters" << endl;
+
+		if (rename("loc3.bin", "loc2.bin") != 0)
+			cout << "Fisierul a fost modificat";
+	}
+
+	int getNumarRanduri() {
+		return numarRanduri;
+	}
+
+	void deleteLoc (int id1) {
+		ifstream f("loc2.bin", ios::binary);
+		ofstream of("loc3.bin", ios::app);
+
+		int fileId;
+
+		while (f.read((char*)&fileId, sizeof(fileId))) {
+			if (fileId != id1) {
+				int pos = f.tellg();
+				f.read((char*)&coloana, sizeof(coloana));
+				f.read((char*)&rand, sizeof(rand));
+
+				string buffer = "";
+				char c = 0;
+				while ((c = f.get()) != 0)
+				{
+					buffer += c;
+				}
+				delete[] tipDiscount;
+				tipDiscount = new char[buffer.length() + 1];
+				strcpy_s(tipDiscount, buffer.length() + 1, buffer.c_str());
+
+				f.read((char*)&numarRanduri, sizeof(numarRanduri));
+				delete[] randuriDezavantajate;
+				randuriDezavantajate = new int[numarRanduri];
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					f.read((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+				int pos2 = f.tellg();
+
+				of.write((char*)&id, sizeof(id));
+				of.write((char*)&coloana, sizeof(coloana));
+				of.write((char*)&rand, sizeof(rand));
+
+				of.write(tipDiscount, (long long)strlen(tipDiscount) + 1);
+				of.write((char*)&numarRanduri, sizeof(numarRanduri));
+
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					of.write((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+			}
+		}
+
+		of.close();
+		f.close();
+
+		if (remove("loc2.bin") != 0)
+			cout << "Fisierul a fost sters" << endl;
+
+		if (rename("loc3.bin", "loc2.bin") != 0)
+			cout << "Fisierul a fost modificat";
+	}
+
+ 
+	void serializare() {
+		fstream f("loc2.bin", ios::binary | ios::app);
+
+		f.write((char*)&id, sizeof(id));
+		f.write((char*)&coloana, sizeof(coloana));
+		f.write((char*)&rand, sizeof(rand));
+
+		f.write(tipDiscount, (long long)strlen(tipDiscount) + 1);
+		f.write((char*)&numarRanduri, sizeof(numarRanduri));
+
+		for (int i = 0; i < numarRanduri; i++)
+		{
+			f.write((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+		}
+		f.close();
+	}
+
+	void deserializare(fstream f, int id) {
+
+		int fileId;
+
+		while (f.read((char*)&fileId, sizeof(fileId))) {
+			if (fileId == id) {
+
+				this->id = fileId;
+				f.read((char*)&coloana, sizeof(coloana));
+				f.read((char*)&rand, sizeof(rand));
+
+				string buffer = "";
+				char c = 0;
+				while ((c = f.get()) != 0)
+				{
+					buffer += c;
+				}
+				delete[] tipDiscount;
+				tipDiscount = new char[buffer.length() + 1];
+				strcpy_s(tipDiscount, buffer.length() + 1, buffer.c_str());
+
+				f.read((char*)&numarRanduri, sizeof(numarRanduri));
+				delete[] randuriDezavantajate;
+				randuriDezavantajate = new int[numarRanduri];
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					f.read((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+			}
+		}
+		f.close();
+
+		cout<<this;
+	}
+
+	void deserializare(int id) {
+		ifstream f("loc2.bin", ios::binary);
+		
+		int fileId;
+
+		while (f.read((char*)&fileId, sizeof(fileId))) {
+			if (fileId == id) {
+
+				this->id = fileId;
+				f.read((char*)&coloana, sizeof(coloana));
+				f.read((char*)&rand, sizeof(rand));
+
+				string buffer = "";
+				char c = 0;
+				while ((c = f.get()) != 0)
+				{
+					buffer += c;
+				}
+				delete[] tipDiscount;
+				tipDiscount = new char[buffer.length() + 1];
+				strcpy_s(tipDiscount, buffer.length() + 1, buffer.c_str());
+
+				f.read((char*)&numarRanduri, sizeof(numarRanduri));
+				delete[] randuriDezavantajate;
+				randuriDezavantajate = new int[numarRanduri];
+				for (int i = 0; i < numarRanduri; i++)
+				{
+					f.read((char*)&randuriDezavantajate[i], sizeof(randuriDezavantajate[i]));
+				}
+			}
+		}
+		f.close();
+	}
+
 	bool operator! () {
 		return ocupat;
 	}
@@ -286,7 +507,6 @@ public:
 		return coloana;
 	}
 
-
 	friend ostream& operator<<(ostream&, Loc);
 	friend istream& operator>>(istream&, Loc&);
 };
@@ -298,9 +518,6 @@ ostream& operator<<(ostream& out, Loc l) {
 
 	cout << "Coloana: ";
 	out << l.coloana << endl;
-
-	cout << "Ocupat: ";
-	out << l.ocupat << endl;
 
 	if (l.aplicaDiscount) {
 		cout << "Discount: ";
@@ -359,6 +576,11 @@ istream& operator>>(istream& in, Loc& l) {
 		getline(in, buffer);
 		l.tipDiscount = new char[buffer.length() + 1];
 		strcpy_s(l.tipDiscount, buffer.length() + 1, buffer.c_str());
+	}
+	else {
+		string niciundiscount = "niciun discount";
+		l.tipDiscount = new char[niciundiscount.length() + 1];
+		strcpy_s(l.tipDiscount, niciundiscount.length() + 1, niciundiscount.c_str());
 	}
 	
 	return in;

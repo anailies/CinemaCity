@@ -144,7 +144,6 @@
     <ClInclude Include="Loc.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Sala.h" />
-    <ClInclude Include="CinemaCity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CinemaCity.cpp" />
